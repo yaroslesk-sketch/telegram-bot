@@ -8,11 +8,28 @@ TOKEN = "8570820876:AAEsirWUfNGrlcF0FcXcJ5O3ahquAX74xv8"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# Клавиатура
-keyboard = InlineKeyboardMarkup(
+# главное меню
+main_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
+        [InlineKeyboardButton(text="Ассортимент", callback_data="catalog")],
         [InlineKeyboardButton(text="Контакты", callback_data="contacts")],
         [InlineKeyboardButton(text="Доставка", callback_data="delivery")]
+    ]
+)
+
+# клавиатура товаров
+catalog_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text="Товар #1", callback_data="item1")],
+        [InlineKeyboardButton(text="Товар #2", callback_data="item2")],
+        [InlineKeyboardButton(text="Товар #3", callback_data="item3")],
+        [InlineKeyboardButton(text="Товар #4", callback_data="item4")],
+        [InlineKeyboardButton(text="Товар #5", callback_data="item5")],
+        [InlineKeyboardButton(text="Товар #6", callback_data="item6")],
+        [InlineKeyboardButton(text="Товар #7", callback_data="item7")],
+        [InlineKeyboardButton(text="Товар #8", callback_data="item8")],
+        [InlineKeyboardButton(text="Товар #9", callback_data="item9")],
+        [InlineKeyboardButton(text="Товар #10", callback_data="item10")],
     ]
 )
 
@@ -27,7 +44,7 @@ Nina Showroom — это пространство современной люк�
 В нашем шоуруме представлены модели, которые подчеркивают индивидуальность и создают безупречный образ.
 
 Выберите нужный раздел ниже:""",
-        reply_markup=keyboard
+        reply_markup=main_keyboard
     )
 
 
@@ -51,7 +68,7 @@ E-mail:
 • VK
 
 Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке.""",
-        reply_markup=keyboard
+        reply_markup=main_keyboard
     )
 
 
@@ -76,7 +93,18 @@ async def delivery(message: Message):
 📞 89025445443
 твоя почта
 также""",
-        reply_markup=keyboard
+        reply_markup=main_keyboard
+    )
+
+
+@dp.message(Command("catalog"))
+async def catalog(message: Message):
+    await message.answer(
+        """Ассортимент Nina Showroom ✨
+
+Здесь представлены товары нашего шоурума.  
+Выберите интересующий вас товар ниже:""",
+        reply_markup=catalog_keyboard
     )
 
 
@@ -102,7 +130,7 @@ E-mail:
 • VK
 
 Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке.""",
-            reply_markup=keyboard
+            reply_markup=main_keyboard
         )
 
     elif callback.data == "delivery":
@@ -125,7 +153,22 @@ E-mail:
 📞 89025445443
 твоя почта
 также""",
-            reply_markup=keyboard
+            reply_markup=main_keyboard
+        )
+
+    elif callback.data == "catalog":
+        await callback.message.answer(
+            """Ассортимент Nina Showroom ✨
+
+Здесь представлены товары нашего шоурума.  
+Выберите интересующий вас товар ниже:""",
+            reply_markup=catalog_keyboard
+        )
+
+    elif callback.data.startswith("item"):
+        await callback.message.answer(
+            "тута твои товары будут, если надо:)",
+            reply_markup=catalog_keyboard
         )
 
     await callback.answer()
