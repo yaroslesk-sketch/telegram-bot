@@ -12,8 +12,7 @@ dp = Dispatcher()
 keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [InlineKeyboardButton(text="Контакты", callback_data="contacts")],
-        [InlineKeyboardButton(text="Доставка", callback_data="delivery")],
-        [InlineKeyboardButton(text="Добро пожаловать", callback_data="welcome")]
+        [InlineKeyboardButton(text="Доставка", callback_data="delivery")]
     ]
 )
 
@@ -44,14 +43,15 @@ async def contacts(message: Message):
 
 E-mail:
 📧 твояпочта
-твоя инста/телега/вк...
+твоя инста/телега/вк
 
 Мы также можем ответить вам в социальных сетях:
 • Telegram
 • Instagram
 • VK
 
-Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке."""
+Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке.""",
+        reply_markup=keyboard
     )
 
 
@@ -75,25 +75,8 @@ async def delivery(message: Message):
 По всем вопросам:
 📞 89025445443
 твоя почта
-также"""
-    )
-
-
-@dp.message(Command("welcome"))
-async def welcome(message: Message):
-    await message.answer(
-        """Добро пожаловать в Nina Showroom ✨
-
-Мы рады приветствовать вас в нашем пространстве люксовой моды.
-
-В Nina Showroom вы найдете:
-• стильную одежду
-• премиальную обувь
-• элегантные аксессуары
-
-Мы тщательно отбираем каждую модель, чтобы предложить нашим клиентам актуальные коллекции и высокое качество.
-
-Приятного знакомства с Nina Showroom ✨"""
+также""",
+        reply_markup=keyboard
     )
 
 
@@ -118,7 +101,8 @@ E-mail:
 • Instagram
 • VK
 
-Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке."""
+Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке.""",
+            reply_markup=keyboard
         )
 
     elif callback.data == "delivery":
@@ -140,14 +124,8 @@ E-mail:
 По всем вопросам:
 📞 89025445443
 твоя почта
-также"""
-        )
-
-    elif callback.data == "welcome":
-        await callback.message.answer(
-            """Добро пожаловать в Nina Showroom ✨
-
-Люксовая одежда, обувь и аксессуары для вашего идеального образа."""
+также""",
+            reply_markup=keyboard
         )
 
     await callback.answer()
