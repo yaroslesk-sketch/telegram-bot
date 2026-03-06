@@ -71,7 +71,7 @@ async def delivery(message: Message):
 async def buttons(callback: CallbackQuery):
 
     if callback.data == "contacts":
-    await callback.message.answer(
+        await callback.message.answer(
         """Контакты Nina Showroom ✨
 
 Мы всегда готовы ответить на ваши вопросы, помочь с подбором моделей и оформить заказ.
