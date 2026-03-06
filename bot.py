@@ -48,7 +48,14 @@ Nina Showroom — это пространство современной люк�
 @dp.message(Command("command1"))
 async def contacts(message: Message):
     await message.answer(
-        "Контакты:\nТелефон: 89025445443"
+        """Контакты Nina Showroom ✨
+
+Мы всегда готовы ответить на ваши вопросы, помочь с подбором моделей и оформить заказ.
+
+Телефон для связи:
+📞 89025445443
+
+Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке."""
     )
 
 
@@ -64,9 +71,16 @@ async def delivery(message: Message):
 async def buttons(callback: CallbackQuery):
 
     if callback.data == "contacts":
-        await callback.message.answer(
-            "Контакты:\nТелефон: 89025445443"
-        )
+    await callback.message.answer(
+        """Контакты Nina Showroom ✨
+
+Мы всегда готовы ответить на ваши вопросы, помочь с подбором моделей и оформить заказ.
+
+Телефон для связи:
+📞 89025445443
+
+Свяжитесь с нами — мы с удовольствием проконсультируем вас по наличию товаров, размерам и доставке."""
+    )
 
     elif callback.data == "delivery":
         await callback.message.answer(
